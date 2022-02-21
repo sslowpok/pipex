@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 10:07:21 by alex              #+#    #+#             */
-/*   Updated: 2022/02/21 18:37:56 by sslowpok         ###   ########.fr       */
+/*   Created: 2022/02/21 17:21:45 by sslowpok          #+#    #+#             */
+/*   Updated: 2022/02/21 18:39:13 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../includes/pipex.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/wait.h>
-# include <sys/types.h>
-# include <fcntl.h>
-# include "../printf/ft_printf.h"
-
-typedef struct s_cmd
+void	pipex(int f1, int f2, char **argv, char **envp)
 {
-	char	**cmd1;
-	char	**cmd2;
-}		t_cmd;
+	int		end[2];
+	pid_t	parent;
 
-typedef struct s_process
-{
-	pid_t	child1;
-	pid_t	child2;
-}		t_process;
-
-
-void	ft_putendl_fd(char *s, int fd);
-
-#endif
+	pipe(end);
+	parent = fork();
+	if (parent < 0)
+		return (perror("Fork: "));
+	// if (!parent)
+	// 	child_process(f2, cmd2);
+	// else
+	// 	parent_process(f2, cmd2);
+}

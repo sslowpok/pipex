@@ -9,8 +9,9 @@ OBJ_DIR =	./obj/
 INC_DIR =	./includes/
 PRINTF_DIR	=	./printf/
 
-SRC_LIST =		main.c\
-				utils.c
+SRC_LIST =		main.c \
+				utils.c \
+				pipex.c
 
 OBJ_LIST =		$(SRC:.c=.o)
 
