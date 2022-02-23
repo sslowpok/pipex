@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:07:21 by alex              #+#    #+#             */
-/*   Updated: 2022/02/21 18:37:56 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:11:25 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ typedef struct s_process
 
 
 void	ft_putendl_fd(char *s, int fd);
+void	pipex(char **argv, char **envp);
 
 #endif

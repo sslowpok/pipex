@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:07:02 by alex              #+#    #+#             */
-/*   Updated: 2022/02/21 18:38:57 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:11:39 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,10 @@ void	inp_error(void)
 ** ./pipex infile "ls -l" "wc -l" outfile
 */
 
-int	main(int argc, __unused char **argv, __unused char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	int	f1;
-	int	f2;
-	
 	if (argc != 5)
 		inp_error();
-	f1 = open(argv[1], O_RDONLY);
-	f2 = open(argv[4], O_CREAT, O_RDWR, O_TRUNC, 0644);
-	if (f1 < 0 || f2 < 0)
-		return (-1);
-	pipex(f1, f2, argv, envp);
+	pipex(argv, envp);
 	return (0);
 }
