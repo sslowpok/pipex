@@ -27,3 +27,8 @@ execve(const char *path, const char **argv, const char **envp) - execute the fil
 4) if child1 == 0, open argv[1] w/ RDONLY, (f) execute argv[2], (envp?)
 5) fork() applies to child2 (pid_t variable)
 6) 
+
+
+
+envp нужен для execve
+для каждого аргумента fork ()
