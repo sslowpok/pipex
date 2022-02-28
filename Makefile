@@ -1,7 +1,7 @@
 NAME =	pipex
 
 CC = cc
-CFLAGS =	-Wall -Wextra -Werror
+CFLAGS =	#-Wall -Wextra -Werror
 RM =		rm -rf
 
 SRC_DIR =	./src/
@@ -11,7 +11,7 @@ PRINTF_DIR	=	./printf/
 
 SRC_LIST =		main.c \
 				utils.c \
-				pipex.c
+				# pipex.c
 
 OBJ_LIST =		$(SRC:.c=.o)
 
