@@ -28,7 +28,8 @@ execve(const char *path, const char **argv, const char **envp) - execute the fil
 5) fork() applies to child2 (pid_t variable)
 6) 
 
-
+in= open()
+dup2(in, 0)
 
 envp нужен для execve
 для каждого аргумента fork ()

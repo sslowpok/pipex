@@ -13,7 +13,7 @@ SRC_LIST =		main.c \
 				utils.c \
 				# pipex.c
 
-OBJ_LIST =		$(SRC:.c=.o)
+OBJ_LIST =		$(SRC:%.c=%.o)
 
 HEADERS_LIST =	pipex.h \
 				error.h

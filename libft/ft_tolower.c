@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/28 16:04:05 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/02/28 16:06:26 by sslowpok         ###   ########.fr       */
+/*   Created: 2021/10/07 15:40:55 by sslowpok          #+#    #+#             */
+/*   Updated: 2021/10/07 15:44:42 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_tolower(int c)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-		printf("Hello from child\n");
+	if (c > 64 && c < 91)
+		return (c + 32);
 	else
-		printf("Hello from parent\n");
-	return (0);
+		return (c);
 }
