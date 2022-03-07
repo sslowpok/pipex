@@ -11,12 +11,13 @@ PRINTF_DIR	=	./printf/
 
 SRC_LIST =		main.c \
 				utils.c \
-				# pipex.c
+				ft_strlcpy.c \
+				ft_split.c
 
 OBJ_LIST =		$(SRC:%.c=%.o)
 
 HEADERS_LIST =	pipex.h \
-				error.h
+				error.h \
 
 SRC =		$(addprefix $(SRC_DIR), $(SRC_LIST))
 OBJ =		$(addprefix $(OBJ_DIR), $(notdir $(OBJ_LIST)))
@@ -31,7 +32,7 @@ $(PRINTF):
 		make -C ./printf/
 
 $(NAME):	$(OBJ)
-		$(CC) $(CFLAGS) $(OBJ) $(PRINTF) -o $@
+		$(CC) $(CFLAGS) $(OBJ) $(PRINTF) -o $(NAME)
 
 $(OBJ_DIR):
 		mkdir $(OBJ_DIR)

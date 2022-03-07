@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 18:11:47 by sslowpok          #+#    #+#             */
-/*   Updated: 2021/11/26 14:28:11 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/07 13:18:37 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include <limits.h>
 
-size_t	ft_strlen(char *s);
+size_t	ft_strlen(const char *s);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
 char	*ft_itoa(int n);
