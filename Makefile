@@ -11,8 +11,10 @@ PRINTF_DIR	=	./printf/
 
 SRC_LIST =		main.c \
 				utils.c \
-				ft_strlcpy.c \
-				ft_split.c
+				ft_split.c \
+				ft_strjoin.c \
+				ft_strncmp.c \
+				ft_sstrlen.c
 
 OBJ_LIST =		$(SRC:%.c=%.o)
 

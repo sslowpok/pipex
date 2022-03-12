@@ -1,47 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_sstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 10:24:55 by alex              #+#    #+#             */
-/*   Updated: 2022/03/12 17:03:41 by sslowpok         ###   ########.fr       */
+/*   Created: 2022/03/12 16:58:46 by sslowpok          #+#    #+#             */
+/*   Updated: 2022/03/12 16:58:58 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	ft_putendl_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-	write(fd, "\n", 1);
-}
-
-char	*ft_strdup(const char *s1)
+size_t	ft_sstrlen(const char *str)
 {
 	size_t	i;
-	char	*out;
 
 	i = 0;
-	if (s1[0] != '\0')
-		out = malloc((ft_sstrlen(s1) + 1) * sizeof(char));
-	else
-		out = malloc(sizeof(char));
-	if (out == NULL)
-		return (NULL);
-	while (s1[i])
-	{
-		out[i] = s1[i];
+	while (str[i])
 		i++;
-	}
-	out[i] = '\0';
-	return (out);
+	return (i);
 }
