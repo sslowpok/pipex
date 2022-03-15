@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:07:02 by alex              #+#    #+#             */
-/*   Updated: 2022/03/12 18:41:59 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:10:01 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	child_two(t_child *child, char **argv, char **envp)
 {
 	int	fd_out;
 
-	fd_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
 	if (fd_out < 0)
 		exit (1);
 	if (dup2(child->fd[0], STDIN_FILENO) < 0)
@@ -172,8 +172,8 @@ void	pipex(char **argv, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	// if (argc < 5)
-	// 	inp_error();
+	if (argc < 5)
+		inp_error();
 	pipex(argv, envp);
 	return (0);
 }
