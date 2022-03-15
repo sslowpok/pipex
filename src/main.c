@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:15:52 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/15 16:16:05 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:30:37 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	inp_error(void)
 {
 	ft_putendl_fd("Invalid input.", 2);
-	exit(INVALID_DATA);
+	exit(1);
 }
 
 /*
@@ -27,9 +27,8 @@ void	inp_error(void)
 void	make_children(t_child *child)
 {
 	if (!child)
-		exit(1);
+		error(errno, "malloc: ");
 	child->path = NULL;
-	child->cmd_path = NULL;
 	child->child1 = 0;
 	child->child2 = 0;
 	child->fd[0] = -1;
@@ -50,14 +49,16 @@ char	**get_paths(char **envp) // returns **char of all paths from "PATH="
 		{
 			paths = ft_split(*envp + 5, ':');
 			if (!paths)
-				exit(1);
+				error(errno, "malloc: ");
 			while (paths[i])
 			{
 				tmp = ft_strjoin(paths[i], "/");
 				if (!tmp)
-					exit(1);
+					error(errno, "malloc: ");
 				free(paths[i]);
 				paths[i] = ft_strdup(tmp);
+				if (!paths[i])
+					error(errno, "malloc: ");
 				free(tmp);
 				i++;
 			}
@@ -76,6 +77,8 @@ char	*make_cmd(char **paths, char **cmd_flags)
 	i = 0;
 	cmd = NULL;
 	cmd = ft_strdup(cmd_flags[0]);
+	if (!cmd)
+		error(errno, "malloc: ");
 	if (!access(cmd,F_OK))
 		return (cmd);
 	else
@@ -90,8 +93,6 @@ char	*make_cmd(char **paths, char **cmd_flags)
 			i++;
 		}
 	}
-	if (!cmd)
-		exit (1);
 	return (cmd);
 }
 
@@ -103,7 +104,7 @@ void	execute_cmd(t_child *child, char *arg, char **envp) // arg = command (argv[
 	paths = get_paths(envp);
 
 	if (!paths)
-		exit(1);
+		error(errno, "malloc: ");
 	// while (*paths)
 	// {
 	// 	ft_printf("%s\n", *paths);
@@ -111,12 +112,11 @@ void	execute_cmd(t_child *child, char *arg, char **envp) // arg = command (argv[
 	// }
 	cmd_flags = ft_split(arg, ' ');
 	if (!cmd_flags)
-		exit(1);
+		error(errno, "malloc: ");
 	child->path = make_cmd(paths, cmd_flags);
 	if (execve(child->path, cmd_flags, envp) == -1)
-		exit (1);
+		error(-1, cmd_flags[0]);
 	free(child->path);
-	//free(child->cmd_path);
 	// execve(<exact path like "usr/bin/ls">, cmd_flags, envp)
 }
 
@@ -124,15 +124,14 @@ void	child_one(t_child *child, char **argv, char **envp)
 {
 	int	fd_in;
 
-	fd_in = open(argv[1], O_RDONLY);
+	fd_in = open(argv[1], O_RDONLY, 0644);
 	if (fd_in < 0)
-		exit(1);
+		error(errno, argv[1]);
 	
 	if (dup2(fd_in, STDIN_FILENO) < 0) // makes stdin = fd_in from file
-		exit(1);
+		error(errno, "Error: ");
 	if (dup2(child->fd[1], STDOUT_FILENO) < 0) // make stdout = fd_out to fd[1]
-		exit(1);
-	
+		error(errno, "Error: ");
 	close(fd_in);
 	close(child->fd[0]);
 	close(child->fd[1]);
@@ -144,13 +143,13 @@ void	child_two(t_child *child, char **argv, char **envp)
 {
 	int	fd_out;
 
-	fd_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
+	fd_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_out < 0)
-		exit (1);
+		error(errno, argv[4]);
 	if (dup2(child->fd[0], STDIN_FILENO) < 0)
-		exit (1);
+		error(errno, "Error: ");
 	if (dup2(fd_out, STDOUT_FILENO) < 0)
-		exit (1);
+		error(errno, "Error: ");
 	close(fd_out);
 	close(child->fd[0]);
 	close(child->fd[1]);
@@ -163,15 +162,15 @@ void	pipex(char **argv, char **envp)
 
 	make_children(&child);
 	if (pipe(child.fd) == -1)
-		exit(1);
+		error(errno, "pipex: ");
 	child.child1 = fork();
 	if (child.child1 < 0)
-		exit(1);
+		error(errno, "fork: ");
 	else if (child.child1 == 0)
 		child_one(&child, argv, envp);
 	child.child2 = fork();
 	if (child.child2 < 0)
-		exit(1);
+		error(errno, "fork: ");
 	else if (child.child2 == 0)
 		child_two(&child, argv, envp);
 	close(child.fd[0]);

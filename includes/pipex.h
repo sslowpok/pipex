@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:07:21 by alex              #+#    #+#             */
-/*   Updated: 2022/03/12 17:01:12 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:54:58 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <fcntl.h>
+# include <errno.h>
+# include <stdio.h>
 # include "../printf/ft_printf.h"
 
 # define INPUT	0
@@ -26,7 +28,6 @@
 typedef struct s_child
 {
 	char	*path;
-	char	*cmd_path;
 	char	**envp;
 	pid_t	child1;
 	pid_t	child2;
@@ -42,5 +43,6 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 size_t	ft_sstrlen(const char *str);
+void	error(int code, char *text);
 
 #endif
