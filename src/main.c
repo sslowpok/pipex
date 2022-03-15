@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 10:07:02 by alex              #+#    #+#             */
-/*   Updated: 2022/03/15 16:10:01 by sslowpok         ###   ########.fr       */
+/*   Created: 2022/03/15 16:15:52 by sslowpok          #+#    #+#             */
+/*   Updated: 2022/03/15 16:16:05 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**get_paths(char **envp) // returns **char of all paths from "PATH="
 		}
 		envp++;
 	}
-	return (NULL);
+	return (0);
 }
 
 char	*make_cmd(char **paths, char **cmd_flags)
@@ -75,13 +75,20 @@ char	*make_cmd(char **paths, char **cmd_flags)
 
 	i = 0;
 	cmd = NULL;
-	while (paths[i])
+	cmd = ft_strdup(cmd_flags[0]);
+	if (!access(cmd,F_OK))
+		return (cmd);
+	else
 	{
-		cmd = ft_strjoin(paths[i], cmd_flags[0]);
-		if (!access(cmd, F_OK))
-			break;
 		free(cmd);
-		i++;
+		while (paths[i])
+		{
+			cmd = ft_strjoin(paths[i], cmd_flags[0]);
+			if (!access(cmd, F_OK))
+				break;
+			free(cmd);
+			i++;
+		}
 	}
 	if (!cmd)
 		exit (1);
@@ -106,7 +113,10 @@ void	execute_cmd(t_child *child, char *arg, char **envp) // arg = command (argv[
 	if (!cmd_flags)
 		exit(1);
 	child->path = make_cmd(paths, cmd_flags);
-	execve(child->path, cmd_flags, envp);
+	if (execve(child->path, cmd_flags, envp) == -1)
+		exit (1);
+	free(child->path);
+	//free(child->cmd_path);
 	// execve(<exact path like "usr/bin/ls">, cmd_flags, envp)
 }
 
@@ -174,6 +184,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	if (argc < 5)
 		inp_error();
+
 	pipex(argv, envp);
 	return (0);
 }
