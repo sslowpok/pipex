@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/16 17:40:19 by sslowpok          #+#    #+#             */
+/*   Updated: 2022/03/16 17:40:27 by sslowpok         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
@@ -15,8 +27,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	dst[i] = '\0';
 	return (ft_sstrlen(src));
 }
-
-
 
 static int	ft_word_count(const char *s, char c)
 {

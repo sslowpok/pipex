@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:07:21 by alex              #+#    #+#             */
-/*   Updated: 2022/03/15 16:54:58 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:41:21 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 size_t	ft_sstrlen(const char *str);
-void	error(int code, char *text);
+void	child_one(t_child *child, char **argv, char **envp);
+void	child_two(t_child *child, char **argv, char **envp);
+void	pipex(char **argv, char **envp);
+void	inp_error(void);
+void	execute_cmd(t_child *child, char *arg, char **envp);
+char	**paths_fill(char **paths);
 
 #endif

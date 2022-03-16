@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:19:56 by alex              #+#    #+#             */
-/*   Updated: 2022/02/21 10:21:24 by alex             ###   ########.fr       */
+/*   Updated: 2022/03/16 17:41:35 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 # define INIT_ERROR		-2
 
 void	inp_error(void);
-
+void	error(int code, char *text);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:47:11 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/15 17:31:00 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:30:40 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ void	error(int code, char *text)
 	}
 	perror(text);
 	exit (1);
+}
+
+void	inp_error(void)
+{
+	ft_putendl_fd("Invalid input.", 2);
+	exit(1);
 }

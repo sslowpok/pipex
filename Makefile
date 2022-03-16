@@ -15,7 +15,8 @@ SRC_LIST =		main.c \
 				ft_strjoin.c \
 				ft_strncmp.c \
 				ft_sstrlen.c \
-				errors.c
+				errors.c \
+				children.c
 
 OBJ_LIST =		$(SRC:%.c=%.o)
 

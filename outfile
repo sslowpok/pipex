@@ -1,11 +1,1 @@
-total 56
--rw-r--r--   1 sslowpok  4221    889 Mar 15 16:52 Makefile
--rw-r--r--   1 sslowpok  4221      7 Mar  7 11:50 README.md
-drwxr-xr-x   4 sslowpok  4221    136 Mar  7 11:50 includes
--rw-r--r--   1 sslowpok  4221     93 Mar 15 17:04 infile
-drwxr-xr-x  46 sslowpok  4221   1564 Mar  7 11:50 libft
-drwxr-xr-x   9 sslowpok  4221    306 Mar 15 17:05 obj
--rw-r--r--   1 sslowpok  4221      0 Mar 15 17:05 outfile
--rwxr-xr-x   1 sslowpok  4221  13912 Mar 15 17:05 pipex
-drwxr-xr-x  14 sslowpok  4221    476 Mar 15 16:15 printf
-drwxr-xr-x   9 sslowpok  4221    306 Mar 15 16:47 src
+      12

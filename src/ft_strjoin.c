@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:55:04 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/15 16:05:34 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:40:36 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	out = malloc(ft_sstrlen(s1) + ft_sstrlen(s2) + 1);
 	if (!out)
 		return (0);
-	
 	while (s1[i])
 	{
 		out[j++] = s1[i++];
