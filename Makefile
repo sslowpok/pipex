@@ -1,12 +1,15 @@
 NAME =	pipex
+NAME_BONUS = pipex_bonus
 
 CC = cc
 CFLAGS =	#-Wall -Wextra -Werror
 RM =		rm -rf
 
-SRC_DIR =	./src/
-OBJ_DIR =	./obj/
-INC_DIR =	./includes/
+SRC_DIR =		./src/
+SRC_DIR_BONUS =	./src_bonus/
+OBJ_DIR =		./obj/
+OBJ_DIR_BONUS =	./obj_bonus/
+INC_DIR =		./includes/
 PRINTF_DIR	=	./printf/
 
 SRC_LIST =		main.c \
@@ -18,13 +21,19 @@ SRC_LIST =		main.c \
 				errors.c \
 				children.c
 
+SRC_LIST_BONUS =	main_bonus.c \
+
+
 OBJ_LIST =		$(SRC:%.c=%.o)
+OBJ_LIST_BONUS =	$(SRC_BONUS:%.c=%.o)
 
 HEADERS_LIST =	pipex.h \
 				error.h \
 
 SRC =		$(addprefix $(SRC_DIR), $(SRC_LIST))
+SRC_BONUS =	$(addprefix $(SRC_DIR_BONUS), $(SRC_LIST_BONUS))
 OBJ =		$(addprefix $(OBJ_DIR), $(notdir $(OBJ_LIST)))
+OBJ_BONUS =	$(addprefix $(OBJ_DIR_BONUS), $(notdir $(OBJ_LIST_BONUS)))
 HEADERS =	$(addprefix $(INC_DIR), $(HEADERS_LIST))
 PRINTF	=	$(addprefix $(PRINTF_DIR), libftprintf.a)
 
@@ -49,5 +58,18 @@ clean:
 
 fclean:	clean
 		$(RM) $(NAME)
+
+bonus:	$(PRINTF) $(NAME_BONUS)
+		# $(RM) $(OBJ_DIR)
+
+$(NAME_BONUS):	$(OBJ_BONUS)
+		$(CC) $(CFLAGS) $(OBJ_BONUS) $(PRINTF) -o $(NAME_BONUS)
+
+$(OBJ_DIR_BONUS):
+		mkdir $(OBJ_DIR_BONUS)
+
+$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c $(HEADERS) | $(OBJ_DIR_BONUS)
+		$(CC) $(CFLAGS) -c $< -o $@
+
 
 re:		fclean $(OBJ_DIR) all
