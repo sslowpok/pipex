@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 17:14:51 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/18 18:09:25 by sslowpok         ###   ########.fr       */
+/*   Created: 2022/03/18 18:07:14 by sslowpok          #+#    #+#             */
+/*   Updated: 2022/03/18 19:52:45 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 #include "../includes/error.h"
 
 void	make_children(t_child *child)
@@ -24,13 +24,39 @@ void	make_children(t_child *child)
 	child->fd[1] = -1;
 }
 
+char	*make_cmd(char **paths, char **cmd_flags)
+{
+	char	*cmd;
+	int		i;
+
+	i = 0;
+	// cmd = NULL;		needed???
+	// cmd = ft_strdup(cmd 
+	// 	IM HERE
+}
+
+void	execute_cmd(t_child *child, char *arg, char **envp)
+{
+	char	**paths;
+	char	**cmd_flags;
+
+	paths = get_paths(envp);
+	if (!paths)
+		error(errno, "malloc: ");
+	cmd_flags = ft_split(arg, ' ');
+	if (!cmd_flags)
+		error(errno, "malloc: ");
+	child->path = make_cmd(paths, cmd_flags);
+	// im here
+}
+
 void	child_one(t_child *child, char **argv, char **envp)
 {
 	int	fd_in;
 
 	fd_in = open(argv[1], O_RDONLY, 0644);
 	if (fd_in < 0)
-		error(errno, argv[1]);
+		error(errno, "Error: ");
 	if (dup2(fd_in, STDIN_FILENO) < 0)
 		error(errno, "Error: ");
 	if (dup2(child->fd[1], STDOUT_FILENO) < 0)
@@ -39,23 +65,6 @@ void	child_one(t_child *child, char **argv, char **envp)
 	close(child->fd[0]);
 	close(child->fd[1]);
 	execute_cmd(child, argv[2], envp);
-}
-
-void	child_two(t_child *child, char **argv, char **envp)
-{
-	int	fd_out;
-
-	fd_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd_out < 0)
-		error(errno, argv[4]);
-	if (dup2(child->fd[0], STDIN_FILENO) < 0)
-		error(errno, "Error: ");
-	if (dup2(fd_out, STDOUT_FILENO) < 0)
-		error(errno, "Error: ");
-	close(fd_out);
-	close(child->fd[0]);
-	close(child->fd[1]);
-	execute_cmd(child, argv[3], envp);
 }
 
 void	pipex(char **argv, char **envp)
@@ -79,27 +88,4 @@ void	pipex(char **argv, char **envp)
 	close(child.fd[1]);
 	waitpid(child.child1, NULL, 0);
 	waitpid(child.child2, NULL, 0);
-}
-
-char	**paths_fill(char **paths)
-{
-	int		i;
-	char	*tmp;
-
-	if (!paths)
-		error(errno, "malloc: ");
-	i = 0;
-	while (paths[i])
-	{
-		tmp = ft_strjoin(paths[i], "/");
-		if (!tmp)
-			error(errno, "malloc: ");
-		free(paths[i]);
-		paths[i] = ft_strdup(tmp);
-		if (!paths[i] || !tmp)
-			error(errno, "malloc: ");
-		free(tmp);
-		i++;
-	}
-	return (paths);
 }

@@ -22,22 +22,30 @@ SRC_LIST =		main.c \
 				children.c
 
 SRC_LIST_BONUS =	main_bonus.c \
+					errors.c \
+					ft_sstrlen.c \
+					utils.c \
+					ft_split.c
 
 
-OBJ_LIST =		$(SRC:%.c=%.o)
+OBJ_LIST =			$(SRC:%.c=%.o)
 OBJ_LIST_BONUS =	$(SRC_BONUS:%.c=%.o)
 
 HEADERS_LIST =	pipex.h \
-				error.h \
+				error.h
+
+HEADERS_LIST_BONUS =	pipex_bonus.h \
+						error.h
 
 SRC =		$(addprefix $(SRC_DIR), $(SRC_LIST))
 SRC_BONUS =	$(addprefix $(SRC_DIR_BONUS), $(SRC_LIST_BONUS))
 OBJ =		$(addprefix $(OBJ_DIR), $(notdir $(OBJ_LIST)))
 OBJ_BONUS =	$(addprefix $(OBJ_DIR_BONUS), $(notdir $(OBJ_LIST_BONUS)))
 HEADERS =	$(addprefix $(INC_DIR), $(HEADERS_LIST))
+HEADERS_BONUS =	$(addprefix $(INC_DIR), $(HEADERS_LIST_BONUS))
 PRINTF	=	$(addprefix $(PRINTF_DIR), libftprintf.a)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
 
 all:	$(PRINTF) $(NAME)
 
@@ -55,12 +63,13 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c $(HEADERS) | $(OBJ_DIR)
 
 clean:
 		$(RM) $(OBJ_DIR)
+		$(RM) $(OBJ_DIR_BONUS)
 
 fclean:	clean
 		$(RM) $(NAME)
+		$(RM) $(NAME_BONUS)
 
 bonus:	$(PRINTF) $(NAME_BONUS)
-		# $(RM) $(OBJ_DIR)
 
 $(NAME_BONUS):	$(OBJ_BONUS)
 		$(CC) $(CFLAGS) $(OBJ_BONUS) $(PRINTF) -o $(NAME_BONUS)
@@ -68,7 +77,7 @@ $(NAME_BONUS):	$(OBJ_BONUS)
 $(OBJ_DIR_BONUS):
 		mkdir $(OBJ_DIR_BONUS)
 
-$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c $(HEADERS) | $(OBJ_DIR_BONUS)
+$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c $(HEADERS_BONUS) | $(OBJ_DIR_BONUS)
 		$(CC) $(CFLAGS) -c $< -o $@
 
 

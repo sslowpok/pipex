@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 10:07:21 by alex              #+#    #+#             */
-/*   Updated: 2022/03/18 17:48:29 by sslowpok         ###   ########.fr       */
+/*   Created: 2022/03/18 17:47:56 by sslowpok          #+#    #+#             */
+/*   Updated: 2022/03/18 19:45:09 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -32,20 +32,15 @@ typedef struct s_child
 	pid_t	child1;
 	pid_t	child2;
 	int		fd[2];
+	// int		current_pipe;
+	// int		i;
 }			t_child;
 
 void	ft_putendl_fd(char *s, int fd);
-char	**ft_split(const char *s, char c);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 size_t	ft_sstrlen(const char *str);
-void	child_one(t_child *child, char **argv, char **envp);
-void	child_two(t_child *child, char **argv, char **envp);
-void	pipex(char **argv, char **envp);
-void	inp_error(void);
-void	execute_cmd(t_child *child, char *arg, char **envp);
-char	**paths_fill(char **paths);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	**ft_split(const char *s, char c);
+char	*ft_strjoin(const char *s1, const char *s2);
 
 #endif

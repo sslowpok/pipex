@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:15:52 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/16 17:39:35 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:42:36 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**get_paths(char **envp)
 	{
 		if (ft_strncmp(*envp, "PATH=", 5) == 0)
 		{
-			paths = NULL;
+			// paths = NULL;
 			paths = paths_fill(ft_split(*envp + 5, ':'));
 			return (paths);
 		}
