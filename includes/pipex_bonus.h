@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 17:47:56 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/19 16:05:28 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/19 18:07:44 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_child
 	int		fd[2];
 	// int		current_pipe;
 	// int		i;
+	int		fd_in;
+	int		fd_out;
 }			t_child;
 
 void	ft_putendl_fd(char *s, int fd);
@@ -43,9 +45,6 @@ size_t	ft_sstrlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(const char *s, char c);
 char	*ft_strjoin(const char *s1, const char *s2);
-void	pipex(char **argv, char **envp);
-char	**paths_fill(char **paths);
-void	execute_cmd(t_child *child, char *arg, char **envp);
-char	**get_paths(char **envp);
+void	error(int code, char *text);
 
 #endif

@@ -19,7 +19,8 @@ SRC_LIST =		main.c \
 				ft_strncmp.c \
 				ft_sstrlen.c \
 				errors.c \
-				children.c
+				children.c \
+				paths.c
 
 SRC_LIST_BONUS =	main_bonus.c \
 					errors.c \

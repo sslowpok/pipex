@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:14:51 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/19 17:00:31 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:36:29 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,27 +79,4 @@ void	pipex(char **argv, char **envp)
 	close(child.fd[1]);
 	waitpid(child.child1, NULL, 0);
 	waitpid(child.child2, NULL, 0);
-}
-
-char	**paths_fill(char **paths)
-{
-	int		i;
-	char	*tmp;
-
-	if (!paths)
-		error(errno, "malloc: ");
-	i = 0;
-	while (paths[i])
-	{
-		tmp = ft_strjoin(paths[i], "/");
-		if (!tmp)
-			error(errno, "malloc: ");
-		free(paths[i]);
-		paths[i] = ft_strdup(tmp);
-		if (!paths[i] || !tmp)
-			error(errno, "malloc: ");
-		free(tmp);
-		i++;
-	}
-	return (paths);
 }
