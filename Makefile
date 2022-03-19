@@ -25,7 +25,9 @@ SRC_LIST_BONUS =	main_bonus.c \
 					errors.c \
 					ft_sstrlen.c \
 					utils.c \
-					ft_split.c
+					ft_split.c \
+					children.c \
+					paths.c
 
 
 OBJ_LIST =			$(SRC:%.c=%.o)
