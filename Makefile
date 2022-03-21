@@ -1,8 +1,7 @@
 NAME =	pipex
-NAME_BONUS = pipex_bonus
 
 CC = cc
-CFLAGS =	#-Wall -Wextra -Werror
+CFLAGS =	-Wall -Wextra -Werror
 RM =		rm -rf
 
 SRC_DIR =		./src/
@@ -27,9 +26,8 @@ SRC_LIST_BONUS =	main_bonus.c \
 					ft_sstrlen.c \
 					utils.c \
 					ft_split.c \
-					children.c \
-					paths.c
-
+					paths.c \
+					cmd.c
 
 OBJ_LIST =			$(SRC:%.c=%.o)
 OBJ_LIST_BONUS =	$(SRC_BONUS:%.c=%.o)
@@ -59,29 +57,37 @@ $(NAME):	$(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) $(PRINTF) -o $(NAME)
 
 $(OBJ_DIR):
-		mkdir $(OBJ_DIR)
+		@mkdir $(OBJ_DIR)
+
+$(OBJ_DIR_BONUS):
+		mkdir $(OBJ_DIR_BONUS)
 	
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c $(HEADERS) | $(OBJ_DIR)
 		$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR_BONUS)%.o:	$(SRC_DIR_BONUS)%.c $(HEADERS_BONUS) | $(OBJ_DIR_BONUS)
+		$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-		$(RM) $(OBJ_DIR)
-		$(RM) $(OBJ_DIR_BONUS)
+		$(RM) $(OBJ_DIR) $(OBJ_DIR_BONUS)
 
 fclean:	clean
-		$(RM) $(NAME)
-		$(RM) $(NAME_BONUS)
+		$(RM) $(NAME) $(PRINTF)
 
-bonus:	$(PRINTF) $(NAME_BONUS)
 
-$(NAME_BONUS):	$(OBJ_BONUS)
-		$(CC) $(CFLAGS) $(OBJ_BONUS) $(PRINTF) -o $(NAME_BONUS)
+bonus:	$(OBJ_BONUS)
+		$(CC) $(CFLAGS) $(OBJ_BONUS) $(PRINTF) -o $(NAME)
 
-$(OBJ_DIR_BONUS):
-		mkdir $(OBJ_DIR_BONUS)
 
-$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c $(HEADERS_BONUS) | $(OBJ_DIR_BONUS)
-		$(CC) $(CFLAGS) -c $< -o $@
+
+# $(NAME_BONUS):	$(OBJ_BONUS)
+# 		$(CC) $(CFLAGS) $(OBJ_BONUS) $(PRINTF) -o $(NAME_BONUS)
+
+# $(OBJ_DIR_BONUS):
+# 		@mkdir $(OBJ_DIR_BONUS)
+
+# $(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c $(HEADERS_BONUS) | $(OBJ_DIR_BONUS)
+# 		$(CC) $(CFLAGS) -c $< -o $@
 
 
 re:		fclean $(OBJ_DIR) all

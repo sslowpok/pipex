@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 18:02:42 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/19 15:29:55 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:48:50 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,14 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+}
+
+void	total_free(char **arr)
+{
+	while (*arr)
+	{
+		free(*arr);
+		arr++;
+	}
+	free(arr);
 }

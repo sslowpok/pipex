@@ -6,7 +6,7 @@
 /*   By: sslowpok <sslowpok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 17:47:56 by sslowpok          #+#    #+#             */
-/*   Updated: 2022/03/19 18:07:44 by sslowpok         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:50:53 by sslowpok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,7 @@ typedef struct s_child
 {
 	char	*path;
 	char	**envp;
-	pid_t	child1;
-	pid_t	child2;
-	pid_t	child3;
 	int		fd[2];
-	// int		current_pipe;
-	// int		i;
 	int		fd_in;
 	int		fd_out;
 }			t_child;
@@ -46,5 +41,11 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(const char *s, char c);
 char	*ft_strjoin(const char *s1, const char *s2);
 void	error(int code, char *text);
+void	inp_error(void);
+char	**get_paths(char **envp);
+char	**paths_fill(char **paths);
+void	total_free(char **arr);
+char	*make_cmd(char **paths, char **cmd_flags);
+void	execute_cmd(char *arg, char **envp);
 
 #endif
